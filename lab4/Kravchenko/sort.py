@@ -49,4 +49,4 @@ def merge(a, p, q, r):
 
 
 merge_sort(a, 0, len(a) - 1, 10)
-print(a)
+stdout.write(a)
