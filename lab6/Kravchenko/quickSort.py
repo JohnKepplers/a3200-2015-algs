@@ -1,4 +1,7 @@
 from random import randint
+from sys import stdin, stdout
+line = stdin.readline()
+a = [int(j) for j in line.split()]
 
 
 def quick_sort(a, p, r):
@@ -14,10 +17,9 @@ def randomised_partition(a, p, r):
     a[i] = a[r]
     a[r] = y
     x = a[r]
-    print(x)
     i = p - 1
     for j in range(p, r):
-        if a[j] <= x:
+        if a[j] < x:
             i += 1
             y = a[i]
             a[i] = a[j]
@@ -28,6 +30,5 @@ def randomised_partition(a, p, r):
     return i + 1
 
 
-a = [j for j in input().split()]
 quick_sort(a, 0, len(a) - 1)
-print(a)
+stdout.write(str(a))
