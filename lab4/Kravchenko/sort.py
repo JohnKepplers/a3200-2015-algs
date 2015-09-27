@@ -1,25 +1,26 @@
-import sys
-from sys import stdin, stdout
+from sys import stdin, stdout, maxsize
+from random import randint
 
-first_line = stdin.readline()
-a = [int(j) for j in first_line.split()]
-res = [0 for j in range(len(a))]
+'''first_line = stdin.readline()
+a = [int(j) for j in first_line.split()]'''
+'''test = [int(0) for i in range(0, 1000000)]
+for i in range(1000000):
+    test[i] = randint(1, 10)'''
 
-
-def insertion_sort(ar):
-    for j in range(1, len(ar)):
-        key = ar[j]
+def insertion_sort(a, p, r):
+    for j in range(p, r):
+        key = a[j]
         i = j - 1
-        while (i >= 0) and (ar[i] > key):
-            ar[i + 1] = ar[i]
+        while i >= p and a[i] > key:
+            a[i + 1] = a[i]
             i -= 1
-        ar[i + 1] = key
+        a[i + 1] = key
 
 
 def merge_sort(a, p, r, k):
     if r - p <= k:
-        insertion_sort(a)
-    elif p < r:
+        insertion_sort(a, p, r)
+    else:
         q = int((p + r) / 2)
         merge_sort(a, p, q, k)
         merge_sort(a, q + 1, r, k)
@@ -35,8 +36,8 @@ def merge(a, p, q, r):
         left[i] = a[p + i]
     for j in range(n2):
         right[j] = a[q + j + 1]
-    left[n1] = sys.maxsize
-    right[n2] = sys.maxsize
+    left[n1] = maxsize
+    right[n2] = maxsize
     i = 0
     j = 0
     for l in range(p, r + 1):
@@ -48,5 +49,6 @@ def merge(a, p, q, r):
             j += 1
 
 
-merge_sort(a, 0, len(a) - 1, 10)
-stdout.write(a)
+'''merge_sort(test, 0, len(test) - 1, 10)
+for i in range(30):
+    stdout.write(str(test[i]))'''
