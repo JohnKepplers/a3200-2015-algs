@@ -26,7 +26,7 @@ class TestSorting(unittest.TestCase):
     def really_big_test(self):
         arr = [666] * 1000000
         res = radix_sort(arr)
-        expected = []
+        expected = [666]*1000000
         self.assertFalse(not res)
         self.assertEqual(expected, res)
 
