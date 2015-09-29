@@ -16,30 +16,24 @@ def crutch(a):
             d.update({a[i]: 1})
         else:
             d[a[i]] += 1
-    ar = [0] * len(d)
     for key in d.keys():
-        ar[counter] = key
+        a[counter] = key
         counter += 1
-    if counter != 0:
-        quick_sort(ar, 0, len(ar) - 1)
-        counter = 0
+    quick_sort(a, 0, counter - 1)
 
 
 def quick_sort(a, p, r):
     global h
-
-    if p <= r:
+    if p == r:
         h = 0
     if p < r:
         h = 0
         q = randomised_partition(a, p, r)
         quick_sort(a, p, q - 1)
         quick_sort(a, q + 1, r)
-    if h == 0:
+    elif (h == 0):
         another_crutch(a)
         h = 1
-
-
 
 
 def randomised_partition(a, p, r):
@@ -57,7 +51,6 @@ def randomised_partition(a, p, r):
 
 def another_crutch(a):
     counter = 0
-    print(counter)
     for key, value in d.items():
         if d[key] > 1:
             counter += d[key] - 1
@@ -72,8 +65,10 @@ def another_crutch(a):
         for i in range(d[key] - 1):
             array[j] = key
             j += 1
-    return print(array)
 
+    return a
 
 
 crutch(a)
+print(a)
+
