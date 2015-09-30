@@ -1,3 +1,6 @@
+from sys import maxsize
+
+
 def insertion_sort(a, p, r):
     for j in range(p, r):
         key = a[j]
