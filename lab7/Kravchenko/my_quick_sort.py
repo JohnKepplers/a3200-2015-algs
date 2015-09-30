@@ -1,28 +1,27 @@
+from random import randint
+
+d = {}
+
+
 def crutch(a):
-    counter = 0
+    ar = []
     for i in range(len(a)):
         if d.get(a[i]) == None:
             d.update({a[i]: 1})
+            ar.append(a[i])
         else:
             d[a[i]] += 1
-    for key in d.keys():
-        a[counter] = key
-        counter += 1
-    quick_sort(a, 0, counter - 1)
+    print(ar)
+    quick_sort(ar, 0, len(ar) - 1)
+    print(another_crutch(ar))
 
 
 def quick_sort(a, p, r):
-    global h
-    if p == r:
-        h = 0
     if p < r:
-        h = 0
         q = randomised_partition(a, p, r)
         quick_sort(a, p, q - 1)
         quick_sort(a, q + 1, r)
-    elif (h == 0):
-        another_crutch(a)
-        h = 1
+    return a
 
 
 def randomised_partition(a, p, r):
@@ -40,19 +39,17 @@ def randomised_partition(a, p, r):
 
 def another_crutch(a):
     counter = 0
-    for key, value in d.items():
-        if d[key] > 1:
-            counter += d[key] - 1
+    for i in range(len(a)):
+        if d[a[i]] > 1:
+            counter += d[a[i]] - 1
 
-    array = [0 for y in range(len(a) + counter)]
-    j = 0
-    l = 0
-    for key in d.keys():
-        array[j] = a[l]
-        j += 1
-        l += 1
-        for i in range(d[key] - 1):
-            array[j] = key
-            j += 1
+    array = []
+    print(a)
+    for l in range(len(a)):
+        array.append(a[l])
+        while d[a[l]] > 1:
+            array.append(a[l])
+            d[a[l]] -= 1
 
-    return a
+    return array
+
