@@ -25,11 +25,25 @@ def stable_sort(input, index, k):
 
 def radix_sort(input):
     d = 0
-    for x in range(len(input)):
-        while input[x] / (10 ** d) != 0:
+    positive = []
+    negative = []
+    for i in range (len(input)):
+        if input[i] >= 0:
+            positive.append(input[i])
+        else:
+            negative.append(input[i])
+    for x in range(len(positive)):
+        while positive[x] / (10 ** d) != 0:
             d += 1
     for i in range(0, d):
-        stable_sort(input, i, 9)
+        stable_sort(positive, i, 9)
+    d = 0
+    for x in range(len(negative)):
+        while negative[x] / -(10 ** d) != 0:
+            d += 1
+    for i in range(0, d):
+        stable_sort(negative, i, 9)
+    input = negative + positive
     return input
 
 radix_sort(input)
