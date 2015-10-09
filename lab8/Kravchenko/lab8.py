@@ -1,6 +1,3 @@
-__label__ = 'lab 8'
-
-
 class Queue:
     def pop(self):
         pass
