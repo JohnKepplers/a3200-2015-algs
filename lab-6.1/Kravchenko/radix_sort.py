@@ -1,8 +1,5 @@
 from sys import stdin
 
-first_line = stdin.readline()
-a = [int(j) for j in first_line.split()]
-
 
 def radix_sort(a):
     rang = 10
@@ -44,8 +41,16 @@ def radix_sort(a):
                 k -= 1
     for i in range(len(ar_negative)):
         ar_negative[i] *= (-1)
+    for i in range(len(a)):
+        a[i] = 0
+    for i in range(len(ar_negative)):
+        a[i] = ar_negative[i]
+    for i in range(len(ar_negative), len(ar_positive)):
+        a[i] = ar_positive[i]
+    return a
 
-    print(ar_negative + ar_positive)
 
-
-radix_sort(a)
+if __name__ == '__main__':
+    ar = [int(i) for i in stdin.readline().split()]
+    radix_sort(ar)
+    print(ar)
