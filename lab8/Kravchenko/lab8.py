@@ -33,20 +33,30 @@ class StacksQueueWithMaxElement(Queue):
             if len(self.push_stack) == 0:
                 return 'empty'
             else:
-                self.pop_stack = self.push_stack[1:-1]
-                k = self.push_stack[0]
+                self.pop_stack = self.push_stack[::-1]
+                k = self.pop_stack[len(self.pop_stack) - 1]
                 self.push_stack.clear()
                 self.max_push_stack.clear()
-                self.max_pop_stack.append(self.pop_stack[0])
-                for i in range(len(self.pop_stack), 1, -1):
-                    if len(self.max_pop_stack) == 0:
+                del self.pop_stack[len(self.pop_stack) - 1]
+                self.max_pop_stack.append(self.pop_stack[len(self.pop_stack) - 1])
+                for i in range(len(self.pop_stack) - 2, 0, -1):
+                     if self.pop_stack[i] > self.max_pop_stack[len(self.max_pop_stack) - 1]:
                         self.max_pop_stack.append(self.pop_stack[i])
-                    else:
-                        if self.pop_stack[i] > self.max_pop_stack[len(self.pop_stack) - i]:
+                     else:
+                        self.max_pop_stack.append(self.max_pop_stack[len(self.max_pop_stack) - 1])
+            return k
+        else:
+            k  =  self.pop_stack[len(self.pop_stack) - 1]
+            del self.pop_stack[len(self.pop_stack) - 1]
+            self.max_pop_stack.clear()
+            if len(self.pop_stack) != 0:
+                self.max_pop_stack.append(self.pop_stack[len(self.pop_stack) - 1])
+                for i in range(len(self.pop_stack) - 2, 0, -1):
+                        if self.pop_stack[i] > self.max_pop_stack[len(self.max_pop_stack) - 1]:
                             self.max_pop_stack.append(self.pop_stack[i])
                         else:
-                            self.max_pop_stack.append(self.max_pop_stack[len(self.pop_stack) - i])
-        return k
+                            self.max_pop_stack.append(self.max_pop_stack[len(self.max_pop_stack) - 1])
+            return k
 
     def size(self):
         return len(self.push_stack) + len(self.pop_stack)
