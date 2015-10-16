@@ -20,7 +20,12 @@ def radix_sort(a):
             counter_positive += 1
 
     if counter_positive > 0:
-        for i in range(len(str(max(ar_positive)))):
+        y = 0
+        z = max(ar_positive)
+        while z > 0:
+            z //= 10
+            y += 1
+        for i in range(y):
             b = [[] for k in range(rang)]
             for x in ar_positive:
                 digit = (x // (10 ** i)) % 10
@@ -29,7 +34,12 @@ def radix_sort(a):
             for k in range(rang):
                 ar_positive += b[k]
     if counter_negative > 0:
-        for i in range(len(str(max(ar_negative)))):
+        y = 0
+        z = (-1)*min(ar_negative)
+        while z > 0:
+            z //= 10
+            y += 1
+        for i in range(y):
             b = [[] for k in range(rang)]
             for x in ar_negative:
                 digit = (x // (10 ** i)) % 10
@@ -45,8 +55,8 @@ def radix_sort(a):
         a[i] = 0
     for i in range(len(ar_negative)):
         a[i] = ar_negative[i]
-    for i in range(len(ar_negative), len(ar_positive)):
-        a[i] = ar_positive[i]
+    for i in range(len(ar_negative), len(a)):
+        a[i] = ar_positive[i - len(ar_negative)]
     return a
 
 
