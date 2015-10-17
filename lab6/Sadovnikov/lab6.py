@@ -44,9 +44,9 @@ def radix_sort(input):
     for i in range(0, d):
         stable_sort(negative, i, 9)
     input = negative + positive
-    return input
+    for x in range(len(input)):
+    print input[x],
 
 radix_sort(input)
 
-for x in range(len(input)):
-    print input[x],
+
