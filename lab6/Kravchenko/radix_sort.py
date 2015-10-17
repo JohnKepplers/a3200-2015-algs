@@ -35,7 +35,7 @@ def radix_sort(a):
                 ar_positive += b[k]
     if counter_negative > 0:
         y = 0
-        z = (-1)*min(ar_negative)
+        z = max(ar_negative)
         while z > 0:
             z //= 10
             y += 1
