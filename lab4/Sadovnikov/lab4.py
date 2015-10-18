@@ -1,10 +1,9 @@
 import sys
-
-__author__ = 'vmath'
 from sys import stdin
 
-line = stdin.readline()
-input = [int(s) for s in line.split(' ')]
+if __name__ == "__main__":
+    line = stdin.readline()
+    input = [int(s) for s in line.split(' ')]
 
 
 def sort(a):
@@ -62,8 +61,7 @@ def merge(a, p, q, r):
             j += 1
 
 
-sort(input)
-
-for x in input:
-    print x,
-
+if __name__ == "__main__":
+    sort(input)
+    for x in input:
+        print x,

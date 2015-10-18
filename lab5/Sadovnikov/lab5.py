@@ -1,8 +1,10 @@
 from sys import stdin
 from random import randint
 
-line = stdin.readline()
-input = [int(s) for s in line.split(' ')]
+if __name__ == "__main__":
+    line = stdin.readline()
+    input = [int(s) for s in line.split(' ')]
+
 
 def quick_sort(array, beginning_index, last_index):
     if beginning_index < last_index:
@@ -36,7 +38,7 @@ def randomized_partition(array, beginning_index, last_index):
     return partition(array, beginning_index, last_index)
 
 
-quick_sort(input, 0, len(input) - 1)
-
-for x in input:
-    print x,
+if __name__ == "__main__":
+    quick_sort(input, 0, len(input) - 1)
+    for x in input:
+        print x,

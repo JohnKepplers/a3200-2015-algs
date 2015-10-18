@@ -56,3 +56,13 @@ class TestSorting(unittest.TestCase):
         res = queue.max()
         expected = 4
         self.assertEqual(expected, res)
+
+
+    def test_erofeev(self):
+        queue = lab8.MaxElementQueue()
+        queue.push(3)
+        queue.push(42)
+        self.assertEqual(42, queue.max())
+        self.assertEqual(3, queue.pop())
+        self.assertEqual(42, queue.max())
+        self.assertEqual(42, queue.pop())

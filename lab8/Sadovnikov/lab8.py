@@ -64,7 +64,7 @@ class MaxElementQueue(Queue):
         self._max_index = 0
 
     def pop(self):
-        self._tricky_list = self._tricky_list[1:]
+        self._max_index += 1
         if self._max_index < len(self._tricky_list):
             self._max = self._tricky_list[self._max_index]
         return self._queue.pop()
@@ -75,8 +75,8 @@ class MaxElementQueue(Queue):
             self._former_length += 1
         if n > self._max:
             self._max = n
-            self._tricky_list = len(self._tricky_list) * [self._max]
-            self._former_length = len(self._tricky_list)
+            self._tricky_list = (len(self._tricky_list) + 1) * [self._max]
+            self._former_length = len(self._tricky_list) + 1
         else:
             self._tricky_list.append(n)
             k = 1
@@ -86,7 +86,7 @@ class MaxElementQueue(Queue):
                 else:
                     k += 1
             if k != 1:
-                self._tricky_list = self._tricky_list[:self._former_length] + k * [n]
+                self._tricky_list = self._tricky_list[:self._former_length + self._max_index] + k * [n]
         return self._queue.push(n)
 
     def size(self):

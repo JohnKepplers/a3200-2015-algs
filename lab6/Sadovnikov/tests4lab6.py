@@ -52,3 +52,10 @@ class TestSorting(unittest.TestCase):
                 subject = -1
                 break
         self.assertTrue(subject != -1)
+
+    def test_negative_element(self):
+        arr = [-1, -333, -22]
+        res = lab6.radix_sort(arr)
+        expected = [-333, -22, -1]
+
+        self.assertEqual(expected, res)
