@@ -1,8 +1,8 @@
 from sys import stdin
 
-
-line = stdin.readline()
-input = [int(s) for s in line.split(' ')]
+if __name__ == "main":
+    line = stdin.readline()
+    input = [int(s) for s in line.split(' ')]
 
 
 def stable_sort(input, index, k):
@@ -27,7 +27,7 @@ def radix_sort(input):
     d = 0
     positive = []
     negative = []
-    for i in range (len(input)):
+    for i in range(len(input)):
         if input[i] >= 0:
             positive.append(input[i])
         else:
@@ -44,9 +44,12 @@ def radix_sort(input):
     for i in range(0, d):
         stable_sort(negative, i, 9)
     input = negative + positive
-    for x in range(len(input)):
-    print input[x],
+    if __name__ == "__main__":
+        for x in range(len(input)):
+            print input[x],
+    else:
+        return input
 
-radix_sort(input)
 
-
+if __name__ == "__main__":
+    radix_sort(input)
