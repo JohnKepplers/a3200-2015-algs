@@ -1,35 +1,55 @@
-from random import randint
 from sys import stdin, stdout
 
 
-def quick_sort(a, p, r):
-    if p < r:
-        first, last = randomised_partition(a, p, r)
-        quick_sort(a, p, first)
-        quick_sort(a, last + 1, r)
-    return a
+class MinHeap():
+    def __init__(self):
+        self.ar = []
+
+    def print_array(self):
+        return self.ar
+
+    def size(self):
+        return len(self.ar)
+
+    def sift_down(self, i):
+        while 2 * i + 1 < self.size():
+            left = 2 * i + 1
+            right = 2 * i + 2
+            j = left
+            if right < self.size() and self.ar[right] < self.ar[left]:
+                j = right
+            if self.ar[i] < self.ar[j]:
+                break
+            self.ar[i], self.ar[j] = self.ar[j], self.ar[i]
+            i = j
+
+    def sift_up(self, i):
+        while self.ar[i] < self.ar[int((i - 1) / 2)]:
+            self.ar[i], self.ar[int((i - 1) / 2)] = self.ar[int((i - 1) / 2)], self.ar[i]
+            i = int((i - 1) / 2)
+
+    def extract_min(self):
+        min = self.ar[0]
+        self.ar[0] = self.ar[self.size() - 1]
+        del self.ar[self.size() - 1]
+        self.sift_down(0)
+        return min
+
+    def insert(self, element):
+        self.ar.append(element)
+        self.sift_up(self.size() - 1)
 
 
-def randomised_partition(a, p, r):
-    rand = randint(p, r)
-    pivot = a[rand]
-    counter = p
-    first = p
-    last = r
-    while counter <= last:
-        if a[counter] > pivot:
-            a[counter], a[last] = a[last], a[counter]
-            last -= 1
-
-        elif a[counter] < pivot:
-            a[counter], a[first] = a[first], a[counter]
-            first += 1
-            counter += 1
-        else:
-            counter += 1
-    return first, last
-
-
-array = [int(i) for i in stdin.readline().split()]
-quick_sort(array, 0, len(array) - 1)
-stdout.write(str(array))
+if __name__ == '__main__':
+    k = int(stdin.readline())
+    a = [int(i) for i in stdin.readline().split()]
+    testing_array = MinHeap()
+    if len(a) >= k:
+        for i in range(k):
+            testing_array.insert(a[i])
+        for i in range(k, len(a)):
+            testing_array.insert(a[i])
+            testing_array.extract_min()
+        stdout.write(str(testing_array.print_array()))
+    else:
+        stdout.write('length is less than k. Error')
