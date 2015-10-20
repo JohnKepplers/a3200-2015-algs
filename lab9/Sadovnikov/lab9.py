@@ -10,53 +10,34 @@ class HeapPriorityQueue:
     def __init__(self):
         self._number_of_max = 0
         self._array = []
-        self._successful = False
 
     def insert(self, key):
         if len(self._array) < self._number_of_max:
             self._array.append((-1) * float('inf'))
             self.increase_key(len(self._array) - 1, key)
         else:
-            min = float('inf')
-            x = 0
-            for i in range(len(self._array) - 1, len(self._array) / 2 - 1, -1):
-                if self._array[i] < min:
-                    min = self._array[i]
-                    x = i
-            self.increase_key(x, key)
-
-    def max(self):
-        return self._array[0]
-
-    def extract_max(self):
-        if len(self._array) == 0:
-            print "empty"
-        max = self._array[0]
-        self._array[0], self._array[len(self._array) - 1] = self._array[len(self._array) - 1], self._array[0]
-        self._array = self._array[:len(self._array) - 1]
-        self._max_heapify(self._array, 0)
-        return max
+            self.increase_key(0, key)
+            self._min_heapify(self._array, 0)
 
     def increase_key(self, i, key):
         if key > self._array[i]:
-            self._successful = True
             self._array[i] = key
-            while i > 0 and self._array[i / 2] < self._array[i]:
+            while i > 0 and self._array[i / 2] > self._array[i]:
                 self._array[i], self._array[i / 2] = self._array[i / 2], self._array[i]
                 i /= 2
 
-    def _max_heapify(self, array, i):
+    def _min_heapify(self, array, i):
         l = i * 2
         r = i * 2 + 1
         if l < len(array) and array[l] < array[i]:
-            largest = l
+            smallest = l
         else:
-            largest = i
-        if r < len(array) and array[r] > array[largest]:
-            largest = r
-        if largest != i:
-            array[i], array[largest] = array[largest], array[i]
-            self._max_heapify(array, largest)
+            smallest = i
+        if r < len(array) and array[r] < array[smallest]:
+            smallest = r
+        if smallest != i:
+            array[i], array[smallest] = array[smallest], array[i]
+            self._min_heapify(array, smallest)
 
     def set_special_k(self, k):
         self._number_of_max = k
