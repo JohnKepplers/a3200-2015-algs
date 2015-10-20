@@ -1,11 +1,5 @@
 from sys import stdin, stdout, maxsize
-from random import randint
 
-'''first_line = stdin.readline()
-a = [int(j) for j in first_line.split()]'''
-'''test = [int(0) for i in range(0, 1000000)]
-for i in range(1000000):
-    test[i] = randint(1, 10)'''
 
 def insertion_sort(a, p, r):
     for j in range(p, r):
@@ -47,8 +41,7 @@ def merge(a, p, q, r):
         else:
             a[l] = right[j]
             j += 1
-
-
-'''merge_sort(test, 0, len(test) - 1, 10)
-for i in range(30):
-    stdout.write(str(test[i]))'''
+if __name__ == '__main__':
+    a = [int(i) for i in stdin.readline().split()]
+    merge_sort(a, 0, len(a), 10)
+    stdout.write(str(a))
