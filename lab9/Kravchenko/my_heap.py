@@ -1,4 +1,4 @@
-rom sys import stdin, stdout
+from sys import stdin, stdout
 
 
 class MinHeap():
@@ -53,3 +53,12 @@ if __name__ == '__main__':
         stdout.write(str(testing_array.print_array()))
     else:
         stdout.write('length is less than k. Error')
+
+
+def test(k, a, heap):
+    for i in range(k):
+        heap.insert(a[i])
+    for i in range(k, len(a)):
+        heap.insert(a[i])
+        heap.extract_min()
+    return heap.print_array()
