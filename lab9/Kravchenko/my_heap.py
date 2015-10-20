@@ -1,14 +1,15 @@
-from sys import stdin, stdout
+rom sys import stdin, stdout
 
 
 class MinHeap():
     def __init__(self):
         self.ar = []
 
+    def print_array(self):
+        return self.ar
+
     def size(self):
         return len(self.ar)
-    def print_array(self):
-        print(self.ar)
 
     def sift_down(self, i):
         while 2 * i + 1 < self.size():
@@ -41,13 +42,14 @@ class MinHeap():
 
 if __name__ == '__main__':
     k = int(stdin.readline())
+    a = [int(i) for i in stdin.readline().split()]
     testing_array = MinHeap()
-    for i in range(25):
-        testing_array.insert(i)
-    testing_array.insert(-64)
-    testing_array.insert(13)
-    n = testing_array.size() - k
-    while n > 0:
-        testing_array.extract_min()
-        n-=1
-    testing_array.print_array()
+    if len(a) >= k:
+        for i in range(k):
+            testing_array.insert(a[i])
+        for i in range(k, len(a)):
+            testing_array.insert(a[i])
+            testing_array.extract_min()
+        stdout.write(str(testing_array.print_array()))
+    else:
+        stdout.write('length is less than k. Error')
