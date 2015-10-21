@@ -1,7 +1,7 @@
 from sys import stdin, stdout
 
 
-def median_of_five_elements(a):
+def median(a):
     if len(a) == 5:
         x = 0
         z = 3
@@ -51,13 +51,13 @@ def find_pivot(a):
     array = [0] * (int((len(a) - 1) / 5) + 1)
     for i in range(0, len(a), 5):
         if len(a) - i >= 5:
-            array[j] = median_of_five_elements([a[i], a[i + 1], a[i + 2], a[i + 3], a[i + 4]])
+            array[j] = median([a[i], a[i + 1], a[i + 2], a[i + 3], a[i + 4]])
             j += 1
         else:
             while len(a) - i > 0:
                 k += [a[i]]
                 i += 1
-            array[j] = median_of_five_elements(k)
+            array[j] = median(k)
     a = array
     return find_pivot(a)
 
