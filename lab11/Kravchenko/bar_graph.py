@@ -1,7 +1,5 @@
 from sys import stdin, stdout
 
-testing_array = [int(i) for i in stdin.readline().split()]
-
 
 def search(ar):
     a = []
@@ -22,4 +20,5 @@ def search(ar):
 
 
 if __name__ == '__main__':
+    testing_array = [int(i) for i in stdin.readline().split()]
     stdout.write(str(search(testing_array)))
