@@ -34,7 +34,6 @@ def search(_ar_odd, _ar_even):
                             the_great_counter += 1
                             d.update({the_great_counter: [_ar_even[i] * _ar_even[i], _ar_odd[j] * _ar_odd[j],
                                                           _ar_odd[k] * _ar_odd[k]]})
-                            print(d[the_great_counter])
                         else:
                             u = 0
     return the_great_counter
