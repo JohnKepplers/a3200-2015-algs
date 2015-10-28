@@ -1,0 +1,38 @@
+import unittest
+from counter import partition
+from random import randint
+
+
+class TestSorting(unittest.TestCase):
+    def test_egyptian(self):
+        arr = [3, 5, 4]
+        res = partition(arr)
+        expected = 1
+        self.assertFalse(not res)
+        self.assertEqual(expected, res)
+
+    def test_empty(self):
+        arr = []
+        res = partition(arr)
+        expected = 0
+        self.assertEqual(expected, res)
+
+    def test_standard(self):
+        arr = [23, 247, 19, 96, 264, 265, 132, 265, 181]
+        res = partition(arr)
+        expected = 2
+        self.assertFalse(not res)
+        self.assertEqual(expected, res)
+
+    def test_big_random(self):
+        arr = [randint(1, 100) for i in range(500)]
+        res = partition(arr)
+        expected = partition(arr)
+        self.assertEqual(expected, res)
+
+    def test_boring(self):
+        arr = [1]*1000000
+        res = partition(arr)
+        expected = 1
+        self.assertFalse(not res)
+        self.assertEqual(expected, res)
