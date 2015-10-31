@@ -16,7 +16,8 @@ def search(ar):
             s = 0
             maximum = ar[i]
     s = 0
-    maximum = ar[len(ar) - 1]
+    if len(ar) != 0:
+        maximum = ar[len(ar) - 1]
     for i in range(len(ar) - 2, -1, -1):
         if ar[i] < maximum:
             s += maximum - ar[i]
