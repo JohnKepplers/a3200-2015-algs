@@ -2,6 +2,7 @@ from sys import stdin, stdout
 
 
 def search(ar):
+    maximum = 0
     max_s = 0
     s = 0
     if len(ar) != 0:
