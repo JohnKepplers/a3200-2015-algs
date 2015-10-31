@@ -22,24 +22,30 @@ class TestSorting(unittest.TestCase):
         expected = 10
         self.assertEqual(expected, res)
 
+    def test_reverse_standard(self):
+        arr = [6, 7, 7, 4, 3, 2, 1, 5, 2]
+        res = search(arr)
+        expected = 10
+        self.assertEqual(expected, res)
+
     def test_hard(self):
         indicator = False
         arr = [4]
-        arr += [1] * 10000
+        arr += [1] * 1000000
         arr += [4]
         time11 = time.time()
         res = search(arr)
         time12 = time.time()
-        expected = 30000
+        expected = 3000000
         self.assertEqual(expected, res)
         print(time12 - time11)
         arr = [4]
-        arr += [1] * 100000
+        arr += [1] * 10000000
         arr += [4]
         time21 = time.time()
         res = search(arr)
         time22 = time.time()
-        expected = 300000
+        expected = 30000000
         self.assertEqual(expected, res)
         print(time22 - time21)
         print((time12 - time11) / (time22 - time21))
