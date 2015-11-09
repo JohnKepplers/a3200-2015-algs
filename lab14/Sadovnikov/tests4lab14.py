@@ -18,3 +18,18 @@ class TestTopologicalSort(unittest.TestCase):
         res = graph.topological_sort()
         expected = [1, 3, 4, 2]
         self.assertEquals(expected, res)
+
+    def trivial_cycle_test(self):
+        graph = lab14.Graph()
+        graph.add_vertex(1)
+        graph.add_vertex(2)
+        graph.add_vertex(3)
+        graph.add_vertex(4)
+        graph.add_directed_link(1, 2)
+        graph.add_directed_link(1, 3)
+        graph.add_directed_link(3, 4)
+        graph.add_directed_link(4, 2)
+        graph.add_directed_link(2, 3)
+        res = graph.topological_sort()
+        expected = None
+        self.assertEquals(expected, res)
