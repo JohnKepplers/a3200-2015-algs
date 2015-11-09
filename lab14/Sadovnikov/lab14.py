@@ -1,4 +1,3 @@
-
 __author__ = 'alexkane'
 
 
@@ -46,20 +45,3 @@ class Graph:
                 break
         vertex[0] = 'blue'
         list.append(key)
-
-
-def DFS(graph):
-    list = []
-    for key in graph:
-        if graph[key][0] == 'white':
-            DFS_Visit(graph, graph[key], key, list)
-    return list
-
-
-def DFS_Visit(graph, vertex, key, list):
-    vertex[0] = 'green'
-    for i in range(1, len(vertex)):
-        if graph[vertex[i]][0] == 'white':
-            DFS_Visit(graph, graph[vertex[i]], vertex[i], list)
-    vertex[0] = 'blue'
-    list.append(key)
