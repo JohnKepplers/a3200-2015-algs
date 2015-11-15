@@ -10,6 +10,9 @@ class Node():
         self.path = float('inf')
         self.link = None
 
+    def __lt__(self, other):
+        return self.path < other.path
+
 
 class WeightedGraph():
     def __init__(self):
@@ -35,11 +38,12 @@ class WeightedGraph():
             else:
                 vertex.path = float('inf')
                 vertex.link = None
-            heapq.heappush(q, (vertex.path, vertex))
+            heapq.heappush(q, vertex)
         s = []
         while len(q) != 0:
-            u = heapq.heappop(q)[1]
+            u = heapq.heappop(q)
             s.append(u)
             for key in u.outcoming_vertexes:
                 self.relax(u.name, key, u.outcoming_vertexes[key])
         return [i.path for i in self.graph]
+

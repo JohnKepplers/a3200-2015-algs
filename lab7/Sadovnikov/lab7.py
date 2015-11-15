@@ -1,9 +1,12 @@
 # coding=utf-8
 from random import randint
 import time
+import sys
 
 __author__ = 'alexkane'
-
+sys.path.insert(0, '/home/alexkane/PyRepository/lab4/Sadovnikov')
+sys.path.insert(0, '/home/alexkane/PyRepository/lab5/Sadovnikov')
+sys.path.insert(0, '/home/alexkane/PyRepository/lab6/Sadovnikov')
 import matplotlib.pyplot as plt
 import lab4
 import lab5
@@ -65,6 +68,7 @@ def universal_plot(fig, ax, term):
             array_of_time.sort()
             array_of_medians[m] = array_of_time[2]
             m += 1
+        print array_of_medians
         ax.plot(xrng, array_of_medians, label=array_of_names[t])
         t += 1
     ax.set_xlabel('size', fontsize=8)
@@ -76,8 +80,10 @@ fig = plt.figure()
 term = 0
 for i in range(2):
     for j in xrange(3):
+        print "Task started"
         ax = plt.subplot2grid((2, 3), (i, j))
         universal_plot(fig, ax, term)
+        print "Task completed"
         term += 1
 
 plt.legend(loc='upper left', title="funcs")
