@@ -7,6 +7,12 @@ class Set:
     def iterate(self):
         pass
 
+class Node():
+    def __init__(self, value):
+        self.left = None
+        self.right = None
+        self.parent = None
+        self.value = value
 
 class UnbalancedBinarySearchTree(Set):
     def __init__(self):
@@ -45,64 +51,42 @@ class UnbalancedBinarySearchTree(Set):
 
     def __iter__(self):
         # return TreeIterator(self)
-        return TreeIterator(self)
+        return self.iterate()
 
-
-class Node():
-    def __init__(self, value):
-        self.left = None
-        self.right = None
-        self.parent = None
-        self.value = value
-
-
-class TreeIterator:
-    def __init__(self, tree):
-        self.tree = tree
-        self.current = tree.root
-        self.tricky_value = self.tree.root.value
-        self.bool = False
-        if self.current.left != None:
-            while self.current.left != None:
-                self.current = self.current.left
-            self.current = self.current.parent
-        else:
-            self.bool = True
-
-    def next(self):
-        if self.tricky_value < self.tree.max or self.tricky_value == self.tree.root.value:
-            if self.bool:
-                self.bool = False
-                return self.current
-            else:
-                if (self.current.left is not None and self.current.left.value > self.tricky_value) or (self.tricky_value == self.tree.root.value and self.current.value != self.tree.root.value):
-                    while self.current.left is not None and self.current.left.value != self.tricky_value:
-                        self.current = self.current.left
-                        self.tricky_value = self.current.value
-                    return self.current
-                if self.current.right is not None and self.current.right.value > self.tricky_value:
-                    if self.current.right.left is None:
-                        self.current = self.current.right
-                        self.tricky_value = self.current.value
-                        return self.current
-                    else:
-                        self.current = self.current.right
-                        while self.current.left is not None:
-                            self.current = self.current.left
-                        self.tricky_value = self.current.value
-                        return self.current
-                if self.current.value <= self.tricky_value:
-                    while self.current.value <= self.tricky_value:
-                        self.current = self.current.parent
-                    self.tricky_value = self.current.value
-                    if self.current.value != self.tree.root.value:
-                        self.tricky_value = self.current.value
-                        return self.current
-                    else:
-                        self.current = self.current.right
-                        return self.current.parent
-                self.current = self.current.parent
-                self.tricky_value = self.current.value
-                return self.current
-        else:
-            raise StopIteration()
+    def iterate(self):
+        v = self.root
+        while v.right is not None:
+            v = v.right
+        end = v.value
+        v = self.root
+        k = -float('inf')
+        while v.left is not None:
+                v = v.left
+        while True:
+            while v.value <= k:
+                v = v.parent
+            if v.value == end:
+                if v.left is None or k >= v.left.value:
+                    yield v.value
+                    break
+            if v.value > k and v.left is None:
+                k = v.value
+                if v.right is None:
+                    v = v.parent
+                else:
+                    v = v.right
+                yield k
+            elif v.value > k and v.left is not None:
+                if v.left.value > k:
+                    while v.left is not None:
+                        v = v.left
+                k = v.value
+                if v.right is None:
+                    v = v.parent
+                else:
+                    v = v.right
+                yield k
+            elif v.right is not None and v.right.value <= k:
+                k = v.value
+                v = v.parent
+                yield k

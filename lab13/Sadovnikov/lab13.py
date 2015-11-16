@@ -11,12 +11,14 @@ class Node:
         left -- link to left child of a node
         right -- link to the right child of a node
         parent -- link to the parent of a node
+        iterated_list -- list of iterated elements of the tree
         """
 
         self.left = left
         self.right = right
         self.parent = parent
         self.key = key
+        self.iterated_list = []
 
 
 class SplayTree():
@@ -52,7 +54,10 @@ class SplayTree():
 
     def __iter__(self):
         """Method responsible for iteration."""
-        return self.iterate()
+        self.iterated_list = []
+        self.iterate(self.root)
+        for i in range(len(self.iterated_list)):
+            yield self.iterated_list[i]
 
     def set_parent(self, child, parent):
         """Helper method to link chosen node with another chosen node.
@@ -208,16 +213,14 @@ class SplayTree():
 
         return self.find(self.root, key) == key
 
-    def iterate(self):
+    def iterate(self, v):
         """Method used by __iter__ method to iterate the tree."""
-        v = self.root
-        while True:
-            while v.left is not None:
-                v = v.left
-            k = self.splay(v)
-            if k.right is not None:
-                v = k.right
-                yield k
-            else:
-                yield k
-                break
+        if v is not None:
+            self.iterate(v.left)
+            self.iterated_list.append(v.key)
+            self.iterate(v.right)
+
+
+
+
+
