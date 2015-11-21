@@ -5,7 +5,7 @@ from sys import maxsize as vasiliy_pisar
 
 class Test(unittest.TestCase):
     def test_veteran(self):
-        graph = lab_14.WeightedGraph()
+        graph = lab16.WeightedGraph()
         graph.add_vertex(1)
         graph.add_vertex(9)
         graph.add_vertex(4)
@@ -19,7 +19,7 @@ class Test(unittest.TestCase):
         self.assertEquals(expected, res)
 
     def test_big(self):
-        graph = lab_14.WeightedGraph()
+        graph = lab16.WeightedGraph()
         graph.add_vertex(1)
         graph.add_vertex(2)
         graph.add_vertex(3)
