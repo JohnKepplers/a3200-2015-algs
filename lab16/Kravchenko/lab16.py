@@ -4,9 +4,9 @@ import heapq
 
 class WeightedGraph:
     def __init__(self):
-        self.a = [[42], [0]]
+        self.a = [[]]
         self.list = []
-        self.d = {42: [vasiliy_pisar, None]}
+        self.d = {}
 
     def size_of_matrix(self):
         return len(self.a)
@@ -18,9 +18,6 @@ class WeightedGraph:
         return len(self.list)
 
     def add_vertex(self, v):
-        if self.size_of_matrix() == 2:
-            self.a[0] = [v]
-            self.d = {v: [vasiliy_pisar, None]}
         self.a[0] += [v]
         self.d.update({v: [vasiliy_pisar, None]})
         for i in range(1, self.size_of_matrix()):
