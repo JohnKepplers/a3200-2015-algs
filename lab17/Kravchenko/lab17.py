@@ -56,7 +56,7 @@ class WeightedGraph:
     def min_tree(self):
         n = self.maximum
         n += 1
-        my_disjoint_set_union = DisjointSetUnion(len(self.a[0]))
+        my_disjoint_set_union = DisjointSetUnion(n)
         for j in range(len(self.a[0])):
             my_disjoint_set_union.make_set(self.a[0][j])
             self.tree[0] += [self.a[0][j]]
@@ -77,12 +77,12 @@ class WeightedGraph:
 
 if __name__ == '__main__':
     graph = WeightedGraph()
-    for k in range(4):
+    for k in range(1, 5):
         graph.add_vertex(k)
-    graph.add_directed_link(0, 1, 4)
-    graph.add_directed_link(1, 2, 3)
-    graph.add_directed_link(2, 3, 1)
-    graph.add_directed_link(0, 3, 2)
+    graph.add_directed_link(1, 2, 4)
+    graph.add_directed_link(2, 3, 3)
+    graph.add_directed_link(3, 4, 1)
+    graph.add_directed_link(1, 4, 2)
     graph.min_tree()
     print(graph.print_matrix())
     print(graph.print_tree())
