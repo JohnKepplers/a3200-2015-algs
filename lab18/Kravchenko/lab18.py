@@ -18,7 +18,6 @@ def distance(a, b):
                 if a[j - 2] != b[i - 1]:
                     transposition += 1
                 current_row[j] = min(add, delete, change, transposition)
-            print(current_row)
 
         return current_row[n]
     else:
@@ -36,7 +35,6 @@ def distance(a, b):
                 if b[j - 2] != a[i - 1]:
                     transposition += 1
                 current_row[j] = min(add, delete, change, transposition)
-            print(current_row)
 
         return current_row[n]
 
