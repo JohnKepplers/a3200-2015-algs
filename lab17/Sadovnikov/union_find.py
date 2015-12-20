@@ -5,9 +5,11 @@ __author__ = 'alexkane'
 class DSU():
     def __init__(self, n):
         self.parent = n * [None]
+        self.rank = n * [None]
 
     def MakeSet(self, x):
         self.parent[x] = x
+        self.rank[x] = 0
 
     def Find(self, x):
         if self.parent[x] == x:
@@ -18,6 +20,9 @@ class DSU():
     def Unite(self, x, y):
         x = self.Find(x)
         y = self.Find(y)
-        if randint(1, 2) == 1:
-            x, y = y, x
-        self.parent[x] = y
+        if self.rank[x] < self.rank[y]:
+            self.parent[x] = y
+        else:
+            self.parent[y] = x
+            if self.rank[x] == self.rank[y]:
+                self.rank[x] = self.rank[x] + 1
