@@ -35,11 +35,8 @@ class WeightedGraph():
 
     def min_tree(self):
         a = WeightedGraph()
-        a.add_vertex(0)
-        a.add_vertex(1)
-        a.add_vertex(2)
-        a.add_vertex(3)
-        a.add_vertex(4)
+        for i in range(len(self.graph)):
+            a.add_vertex(i)
         dsu = union_find.DSU(len(self.graph))
         list_of_ribs = []
         for vertex in self.graph:
