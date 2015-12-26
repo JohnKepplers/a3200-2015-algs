@@ -29,19 +29,10 @@ class Graph:
     def special_DFS_Visit(self, graph, vertex, key, list):
         vertex[0] = 'green'
         for i in range(1, len(vertex)):
-            if self.bool:
                 if graph[vertex[i]][0] == 'white':
                     self.special_DFS_Visit(graph, graph[vertex[i]], vertex[i], list)
-                elif graph[vertex[i]][0] == 'blue':
-                    new_bool = False
-                    for x in graph[vertex[i]]:
-                        if x != 'blue' and graph[x][0] == 'blue':
-                            new_bool = True
-                            break
-                    if new_bool:
-                        self.bool = False
-                        break
-            else:
-                break
+                elif graph[vertex[i]][0] == 'green':
+                    self.bool = False
+                    break
         vertex[0] = 'blue'
         list.append(key)
