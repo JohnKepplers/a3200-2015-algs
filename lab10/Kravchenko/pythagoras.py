@@ -1,44 +1,35 @@
 from sys import stdin, stdout
 
 
-def partition(ar):
-    ar_odd = []
-    ar_even = []
-    for i in range(len(ar)):
-        if ar[i] % 4 == 0:
-            ar_even += [ar[i]]
-        elif ar[i] % 2 == 1:
-            ar_odd += [ar[i]]
-    return search(ar_odd, ar_even)
-
-
-def search(_ar_odd, _ar_even):
-    if len(_ar_odd) < 2:
-        return 0
-    if len(_ar_even) < 1:
-        return 0
-    the_great_counter = 0
-    d = {}
-    u = 0
-    d.update({0: [-1, -1, -1]})
-    for i in range(len(_ar_even)):
-        for j in range(len(_ar_odd)):
-            for k in range(len(_ar_odd)):
-                if j != k:
-                    if _ar_even[i] * _ar_even[i] + _ar_odd[j] * _ar_odd[j] == _ar_odd[k] * _ar_odd[k]:
-                        for h in range(0, the_great_counter + 1):
-                            if [_ar_even[i] * _ar_even[i], _ar_odd[j] * _ar_odd[j], _ar_odd[k] * _ar_odd[k]] == d[h]:
-                                u = 1
-                                break
-                        if u == 0:
-                            the_great_counter += 1
-                            d.update({the_great_counter: [_ar_even[i] * _ar_even[i], _ar_odd[j] * _ar_odd[j],
-                                                          _ar_odd[k] * _ar_odd[k]]})
-                        else:
-                            u = 0
-    return the_great_counter
+def pythagoras(array):
+    helping_array = []
+    for i in range(len(array)):
+        helping_array.append(array[i] * array[i])
+    counter = 0
+    helping_array.sort()
+    j = 0
+    a = len(helping_array)
+    while j < a:
+        true_square = helping_array[j]
+        i = j + 1
+        while i < a and true_square == helping_array[i]:
+            del helping_array[i]
+            a -= 1
+        j += 1
+    for i in range(2, a):
+        left = 0
+        right = i - 1
+        while left < right:
+            if helping_array[left] + helping_array[right] == helping_array[i]:
+                counter += 1
+            if helping_array[left] + helping_array[right] < helping_array[i]:
+                left += 1
+            else:
+                right -= 1
+    return counter
 
 
 if __name__ == '__main__':
     ar = [int(i) for i in stdin.readline().split()]
-    stdout.write(str((partition(ar))))
+    stdout.write(str(pythagoras(ar)))
+
