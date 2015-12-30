@@ -8,5 +8,5 @@ class TestLevi(unittest.TestCase):
       self.assertEqual(expected, res)
     def test_two(self):
       res = lab18.execute("python", "shit")
-      expected = 3
+      expected = 5
       self.assertEqual(expected, res)
