@@ -4,7 +4,7 @@ from random import randint
 from time import time
 
 
-class TestSorting(unittest.TestCase):
+class TestNumbers(unittest.TestCase):
     def test_egyptian(self):
         arr = [3, 5, 4]
         res = pythagoras(arr)
