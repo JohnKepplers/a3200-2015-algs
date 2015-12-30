@@ -11,7 +11,7 @@ class TestNumbers(unittest.TestCase):
         expected = 1
         self.assertEqual(expected, res)
 
-    def hard_egyptian(self):
+    def test_hard_egyptian(self):
         arr = [5, 4, 3, 5, 3, 5, 3, 4, 5, 4, 3, 5]
         res = pythagoras(arr)
         expected = 1
