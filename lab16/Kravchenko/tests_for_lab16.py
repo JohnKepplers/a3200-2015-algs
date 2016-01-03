@@ -1,6 +1,5 @@
 import lab16
 import unittest
-from sys import maxsize
 
 
 class Test(unittest.TestCase):
@@ -15,7 +14,7 @@ class Test(unittest.TestCase):
         graph.add_directed_link(1, 9, 11)
         graph.add_directed_link(9, 1, 1941)
         res = graph.paths(1)
-        expected = [0, maxsize, 3, 10]
+        expected = [[1], [None], [1, 5], [1, 5, 9]]
         self.assertEquals(expected, res)
 
     def test_big(self):
@@ -39,5 +38,5 @@ class Test(unittest.TestCase):
         graph.add_directed_link(3, 1, 8)
         graph.add_directed_link(1, 3, 9)
         res = graph.paths(1)
-        expected = [0, 1, 9, maxsize, 18, 9]
+        expected = [[1], [1, 2], [1, 3], [None], [1, 3, 5], [1, 2, 6]]
         self.assertEquals(expected, res)
