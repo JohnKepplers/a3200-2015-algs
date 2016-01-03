@@ -55,17 +55,36 @@ class WeightedGraph:
                 if self.graph[self.graph[0].index(u) + 1][self.graph[0].index(key)] != 0:
                     self.relax(u, key, self.graph[self.graph[0].index(u) + 1][self.graph[0].index(key)])
         array = []
-        for key in self.d.keys():
-            array += [self.d[key][0]]
+        print(self.d)
+        for key, value in self.d.items():
+            if self.d[key][1] is None:
+                if self.d[key][0] < maxsize:
+                    array += [[key]]
+                else:
+                    array += [[None]]
+            else:
+                ar = []
+                this_key = key
+                while self.d[this_key][1] is not None:
+                    ar += [this_key]
+                    this_key = self.d[this_key][1]
+                ar += [this_key]
+                ar.reverse()
+                array += [ar]
         return array
+
+
 if __name__ == '__main__':
     graph = WeightedGraph()
     graph.add_vertex(1)
-    graph.add_vertex(9)
+    graph.add_vertex(2)
+    graph.add_vertex(3)
     graph.add_vertex(4)
     graph.add_vertex(5)
-    graph.add_directed_link(1, 5, 3)
-    graph.add_directed_link(5, 9, 7)
-    graph.add_directed_link(1, 9, 11)
-    graph.add_directed_link(9, 1, 1941)
+    graph.add_directed_link(1, 4, 8)
+    graph.add_directed_link(1, 2, 1)
+    graph.add_directed_link(2, 3, 2)
+    graph.add_directed_link(3, 4, 3)
+    graph.add_directed_link(2, 4, 1)
     print(graph.paths(1))
+
