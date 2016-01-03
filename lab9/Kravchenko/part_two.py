@@ -12,16 +12,16 @@ def insertion_sort(a, p, r):
     return a
 
 
-def sorting(a):
+def sorting(a, p, r):
     cr = []
     j = 0
     array = []
-    for i in range(0, len(a), 5):
-        if len(a) - i >= 5:
-            array += insertion_sort([a[i], a[i + 1], a[i + 2], a[i + 3], a[i + 4]], 0, 5)
+    for i in range(p, r + 1, 5):
+        if r - p >= 4:
+            array += insertion_sort([a[p + i], a[p + i + 1], a[p + i + 2], a[p + i + 3], a[p + i + 4]], 0, 5)
             j += 1
         else:
-            while len(a) - i > 0:
+            while r - p > 0:
                 cr += [a[i]]
                 i += 1
             array += insertion_sort(cr, 0, len(cr))
@@ -29,7 +29,7 @@ def sorting(a):
 
 
 def find_pivot(a, p, r):
-    a = sorting(a)
+    a = sorting(a, p, r)
     if r - p <= 4:
         if r - p == 4 or r - p == 3:
             return a[p + 2]
