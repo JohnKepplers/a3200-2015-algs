@@ -4,7 +4,6 @@ from sys import stdin, stdout
 def palindrome(string):
     matrix = [[0 for i in range(len(string) - 1)] for j in range(len(string) - 1)]
     helping_matrix = [[0 for i in range(len(string) - 1)] for j in range(len(string) - 1)]
-    print(matrix)
     res1 = ""
     res2 = ""
     res3 = ""
