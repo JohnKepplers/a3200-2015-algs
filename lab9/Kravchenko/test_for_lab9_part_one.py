@@ -1,5 +1,5 @@
 import unittest
-import lab8
+import part_one
 
 
 class TestSorting(unittest.TestCase):
