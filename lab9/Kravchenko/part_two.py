@@ -14,17 +14,20 @@ def insertion_sort(a, p, r):
 
 def sorting(a, p, r):
     cr = []
-    j = 0
     array = []
+    for i in range(p):
+        array += [a[i]]
     for i in range(p, r + 1, 5):
-        if r - p >= 4:
-            array += insertion_sort([a[p + i], a[p + i + 1], a[p + i + 2], a[p + i + 3], a[p + i + 4]], 0, 5)
-            j += 1
+        if r - i >= 4:
+            array += insertion_sort([a[i], a[i + 1], a[i + 2], a[i + 3], a[i + 4]], 0, 5)
         else:
-            while r - p > 0:
-                cr += [a[i]]
-                i += 1
+            j = p
+            while r - j >= 0:
+                cr += [a[j]]
+                j += 1
             array += insertion_sort(cr, 0, len(cr))
+    for i in range(r + 1, len(a)):
+        array += [a[i]]
     return array
 
 
@@ -71,7 +74,6 @@ def select(a, p, r, i, const):
     q = smart_partition(a, p, r)
     n = q - p + 1
     if i == n:
-        print(q)
         for i in range(q, q + const):
             ans += [a[i]]
         return ans
