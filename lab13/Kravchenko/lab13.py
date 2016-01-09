@@ -130,4 +130,8 @@ class SplayTree:
             else:
                 yield k
                 break
+            
+            
+    def contains(self, key):
+        return self.find(self.root, key) == key
 
