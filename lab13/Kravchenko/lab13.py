@@ -1,5 +1,5 @@
 class Node:
-    """ Class for single node """
+    """Class for single node"""
 
     def __init__(self, key, left=None, right=None, parent=None):
         self.left = left
@@ -14,7 +14,7 @@ class SplayTree:
 
     def set_parent(self, child, parent):
         """ First auxiliary function for working with pointer to parents """
-        if child != None:
+        if child is not None:
             child.parent = parent
 
     def keep_parent(self, v):
@@ -40,8 +40,9 @@ class SplayTree:
         child.parent = grandparent
 
     def splay(self, v):
-        """ When our vertex go to the root,
-        distance to the root is reduced not only for raising the top, but for all her descendants in the current subtrees """
+        """When our vertex go to the root,
+        distance to the root is reduced not only for raising the top, but for all her descendants in the current subtrees
+        """
         if v.parent == None:
             return v
         parent = v.parent
@@ -60,6 +61,7 @@ class SplayTree:
             return self.splay(v)
 
     def find(self, v, key):
+        """After the vertex is found, we pull it up and do the root using the procedure splay"""
         if v == None:
             return None
         if key == v.key:
@@ -72,6 +74,7 @@ class SplayTree:
         return self.splay(v)
 
     def split(self, root, key):
+        """Split takes an key and the tree divides into two. In one tree all the values less than key, and the other - more"""
         if root == None:
             return None, None
         root = self.find(root, key)
@@ -89,29 +92,33 @@ class SplayTree:
             return left, root
 
     def merge(self, left, right):
-        if right == None:
+        """Merge takes as input two trees: left and right. To work correctly, the keys of the tree should be left less keys tree right.
+         Here we take the top with the smallest key right wood the right and pull it up. After that, as the left subtree attach a tree left
+         """
+        if right is None:
             return left
-        if left == None:
+        if left is None:
             return right
         right = self.find(right, left.key)
         right.left, left.parent = left, right
         return right
 
-    ''' '''
-
-    def insert(self, root, key):
+    def add(self, root, key):
+        """To add the key, use the split over it, and then make a new top of the root, which is the result of subtrees split"""
         left, right = self.split(root, key)
         root = Node(key, left, right)
         self.keep_parent(root)
         return root
 
     def remove(self, root, key):
+        """To remove the top, you need to pick it up, and then merge its left and right subtrees"""
         root = self.find(root, key)
         self.set_parent(root.left, None)
         self.set_parent(root.right, None)
         return self.merge(root.left, root.right)
 
     def iterate(self):
+        """No comments"""
         v = self.root
         while True:
             while v.left is not None:
@@ -123,3 +130,4 @@ class SplayTree:
             else:
                 yield k
                 break
+
