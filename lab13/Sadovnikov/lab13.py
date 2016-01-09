@@ -219,6 +219,9 @@ class SplayTree():
             self.iterate(v.left)
             self.iterated_list.append(v.key)
             self.iterate(v.right)
+            
+    def contains(self, key):
+        return self.find(self.root, key) == key
 
 
 
