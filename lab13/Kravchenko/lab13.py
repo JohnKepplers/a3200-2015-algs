@@ -103,12 +103,12 @@ class SplayTree:
         right.left, left.parent = left, right
         return right
 
-    def add(self, root, key):
+    def add(self, key):
         """To add the key, use the split over it, and then make a new top of the root, which is the result of subtrees split"""
-        left, right = self.split(root, key)
-        root = Node(key, left, right)
-        self.keep_parent(root)
-        return root
+        left, right = self.split(self.root, key)
+        self.root = Node(key, left, right)
+        self.keep_parent(self.root)
+        return self.root
 
     def remove(self, root, key):
         """To remove the top, you need to pick it up, and then merge its left and right subtrees"""
