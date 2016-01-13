@@ -66,30 +66,9 @@ class UnbalancedBinarySearchTree(Set):
                     break
 
     def next_node(self, node):
-        if node.key <= self.current_min_node:
-            this_node = node
-            while this_node.key <= self.current_min_node:
-                this_node = this_node.parent
-            return this_node
         if node.key == self.max:
-            if node.left is None or self.current_min_node >= node.left.key:
-                return node.key
-        if node.key > self.current_min_node and node.left is None:
-            self.current_min_node = node.key
-            if node.right is None:
-                this_node = node.parent
-                while this_node.key <= self.current_min_node:
-                    this_node = this_node.parent
-                return this_node
-            else:
-                this_node = node.right
-                if this_node.left is None:
-                    return this_node
-                else:
-                    while this_node.left is not None:
-                        this_node = this_node.left
-                return this_node
-        elif node.key > self.current_min_node and node.left is not None:
+            return node.key
+        if node.left is not None:
             if node.left.key > self.current_min_node:
                 while node.left is not None:
                     node = node.left
@@ -107,12 +86,25 @@ class UnbalancedBinarySearchTree(Set):
                 while this_node.left is not None:
                     this_node = this_node.left
                 return this_node
-        elif node.right is not None and node.right.key <= self.current_min_node:
+        else:
             self.current_min_node = node.key
-            return node.parent
+            if node.right is None:
+                this_node = node.parent
+                while this_node.key <= self.current_min_node:
+                    this_node = this_node.parent
+                return this_node
+            else:
+                this_node = node.right
+                if this_node.left is None:
+                    return this_node
+                else:
+                    while this_node.left is not None:
+                        this_node = this_node.left
+                return this_node
 
     def iterate(self):
-        self.current_min_node -= 1
+        if self.current_min_node is not None:
+            self.current_min_node -= 1
         if self.root is not None:
             this_node = self.root
             while this_node.left is not None:
