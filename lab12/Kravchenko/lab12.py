@@ -19,10 +19,7 @@ class UnbalancedBinarySearchTree(Set):
         self.root = None
         self.max = None
         self.how_many_nodes_on_the_my_binary_christmas_tree = 0
-        self.deep = 0
-        self.helping_node = None
-        self.number = 0
-        self.a = None
+        self.current_min_node = None
 
     def __iter__(self):
         return self.iterate()
@@ -44,6 +41,7 @@ class UnbalancedBinarySearchTree(Set):
             self.root = Node(key)
             self.max = key
             self.how_many_nodes_on_the_my_binary_christmas_tree += 1
+            self.current_min_node = key
             return
         while x is not None:
             if key > x.key:
@@ -63,47 +61,63 @@ class UnbalancedBinarySearchTree(Set):
                     self.how_many_nodes_on_the_my_binary_christmas_tree += 1
                     z.parent = x
                     x.left = z
-                    parent_node = x
+                    if key < self.current_min_node:
+                        self.current_min_node = key
                     break
 
     def next_node(self, node):
-        while node.key < self.max:
-            if node.right is not None and self.a is not None and node.key == self.a.key:
-
-                self.a = node.right
-                self.helping_node = None
-                self.deep = 0
+        if node.key <= self.current_min_node:
+            this_node = node
+            while this_node.key <= self.current_min_node:
+                this_node = this_node.parent
+            return this_node
+        if node.key == self.max:
+            if node.left is None or self.current_min_node >= node.left.key:
+                return node.key
+        if node.key > self.current_min_node and node.left is None:
+            self.current_min_node = node.key
+            if node.right is None:
+                this_node = node.parent
+                while this_node.key <= self.current_min_node:
+                    this_node = this_node.parent
+                return this_node
+            else:
+                this_node = node.right
+                if this_node.left is None:
+                    return this_node
+                else:
+                    while this_node.left is not None:
+                        this_node = this_node.left
+                return this_node
+        elif node.key > self.current_min_node and node.left is not None:
+            if node.left.key > self.current_min_node:
+                while node.left is not None:
+                    node = node.left
+            self.current_min_node = node.key
+            if node.right is None:
+                this_node = node.parent
+                if this_node.key > self.current_min_node:
+                    return this_node
+                else:
+                    while this_node.key <= self.current_min_node:
+                        this_node = this_node.parent
+                    return this_node
+            else:
                 this_node = node.right
                 while this_node.left is not None:
                     this_node = this_node.left
                 return this_node
-            if node.right is None and node.left is None and self.helping_node is not None and self.helping_node is not None and node is node.parent.right:
-                print(node.key, self.deep)
-                while self.deep > 0:
-                    self.deep -= 1
-                    node = node.parent
-                self.helping_node = None
-                return node.parent
-            if node.right is None:
-                return node.parent
-
-            this_node = node.right
-            self.helping_node = node.right
-            while this_node.left is not None:
-                this_node = this_node.left
-            self.deep += 1
-
-            return this_node
-        return node
+        elif node.right is not None and node.right.key <= self.current_min_node:
+            self.current_min_node = node.key
+            return node.parent
 
     def iterate(self):
-        self.a = self.root
+        self.current_min_node -= 1
         if self.root is not None:
             this_node = self.root
             while this_node.left is not None:
                 this_node = this_node.left
             current_node = this_node
-            self.number += 1
             for i in range(self.how_many_nodes_on_the_my_binary_christmas_tree):
                 yield current_node.key
-                current = self.next_node(current_node)
+                current_node = self.next_node(current_node)
