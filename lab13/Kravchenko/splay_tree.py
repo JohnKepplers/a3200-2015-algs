@@ -13,8 +13,6 @@ class SplayTree:
         self.root = None
 
     def __iter__(self):
-        """Iterating the splay tree."""
-
         v = self.root
         if v is None:
             return
