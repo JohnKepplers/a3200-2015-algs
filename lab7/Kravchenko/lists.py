@@ -48,6 +48,7 @@ def abnormal_sort_list(length):
     return a[::-1]
 
 
-def boring_list(length, number):
+def boring_list(length):
+    number = randint(0,100)
     a = [number for i in range(length)]
     return a
