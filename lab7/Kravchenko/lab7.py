@@ -1,33 +1,46 @@
-import matplotlib.pyplot as plt
-from math import log, sin
+import merge_sort
+import q_sort
+import radix_sort
+import bar_graph
+from random import randint
+from time import time
+import pylab
 
-funcs = dict()
-funcs['pow'] = lambda x: x ** 1.5
-funcs['linear'] = lambda x: x
-funcs['nlogn'] = lambda x: x * log(x)
-funcs['sin'] = lambda x: sin(x) * 100
+lists = {"Random numbers in [-1.000.000, 1.000.000]": bar_graph.positive_and_negative_random_list,
+         "Random numbers in [0, 10.000]": bar_graph.positive_random_list,
+         "Partially sorted numbers in [0, 10.000]": bar_graph.strange_sorted_list,
+         "Ascending sorted numbers in  [0, 10.000]": bar_graph.normal_sort_list,
+         "Descending sorted numbers in  [0, 10.000]": bar_graph.abnormal_sort_list,
+         "Same numbers": bar_graph.boring_list
+         }
 
+functions = {"Merge sort": merge_sort,
+             "Quick sort": q_sort,
+             "Radix sort": radix_sort,
+             "Enemy sort": sorted}
+number_of_subwindow = 1
+mne_nujny_bally = [100 + 100000 * bally for bally in range(5)]
+for list_name, lists in lists.items():
+    pylab.subplot(2, 3, number_of_subwindow)
+    pylab.xlabel("size, elem")
+    pylab.ylabel("time, sec")
+    print("On the battlefield: ", list_name)
+    for func_name, func in functions.items():
+        millis = []
+        for size in mne_nujny_bally:
+            spaggiari = 0.0
+            for i in range(5):
+                array = lists(size)
+                t1 = time()
+                func(array)
+                t2 = time()
+                spaggiari += t2 - t1
+            spaggiari /= 5.0
+            millis += [spaggiari]
+            print("Using ", func_name, " on list of size ", size)
+        pylab.plot(mne_nujny_bally, millis, label=func_name)
+    pylab.title(list_name)
+    pylab.legend(loc='upper left', title="Sorts")
+    number_of_subwindow += 1
 
-def example_plot(fig, ax):
-    xrng = xrange(1, 100, 10)
-    for name, func in funcs.iteritems():
-        ax.plot(xrng, map(func, xrng), label=name)
-
-    ax.set_xlabel('size', fontsize=8)
-    ax.set_ylabel('ms', fontsize=8)
-    ax.set_title('random [0, 10000]', fontsize=8)
-
-
-def show_grid():
-    fig = plt.figure()
-    for i in xrange(2):
-        for j in xrange(3):
-            ax = plt.subplot2grid((2, 3), (i, j))
-            example_plot(fig, ax)
-    plt.legend(loc='upper left', title="funcs")
-    plt.tight_layout()
-    plt.show()
-
-
-if __name__ == "__main__":
-    show_grid()
+pylab.show()
