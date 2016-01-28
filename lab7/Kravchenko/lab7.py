@@ -9,7 +9,7 @@ import pylab
 lists = {"Random numbers in [-1.000.000, 1.000.000]": lists.positive_and_negative_random_list,
          "Random numbers in [0, 10.000]": lists.positive_random_list,
          "Partially sorted numbers in [0, 10.000]": lists.strange_sorted_list,
-         "Ascending sorted numbers in  [0, 10.000]": listsh.normal_sort_list,
+         "Ascending sorted numbers in  [0, 10.000]": lists.normal_sort_list,
          "Descending sorted numbers in  [0, 10.000]": lists.abnormal_sort_list,
          "Same numbers": lists.boring_list
          }
