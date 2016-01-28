@@ -1,17 +1,17 @@
 import merge_sort
 import q_sort
 import radix_sort
-import bar_graph
+import lists
 from random import randint
 from time import time
 import pylab
 
-lists = {"Random numbers in [-1.000.000, 1.000.000]": bar_graph.positive_and_negative_random_list,
-         "Random numbers in [0, 10.000]": bar_graph.positive_random_list,
-         "Partially sorted numbers in [0, 10.000]": bar_graph.strange_sorted_list,
-         "Ascending sorted numbers in  [0, 10.000]": bar_graph.normal_sort_list,
-         "Descending sorted numbers in  [0, 10.000]": bar_graph.abnormal_sort_list,
-         "Same numbers": bar_graph.boring_list
+lists = {"Random numbers in [-1.000.000, 1.000.000]": lists.positive_and_negative_random_list,
+         "Random numbers in [0, 10.000]": lists.positive_random_list,
+         "Partially sorted numbers in [0, 10.000]": lists.strange_sorted_list,
+         "Ascending sorted numbers in  [0, 10.000]": listsh.normal_sort_list,
+         "Descending sorted numbers in  [0, 10.000]": lists.abnormal_sort_list,
+         "Same numbers": lists.boring_list
          }
 
 functions = {"Merge sort": merge_sort,
