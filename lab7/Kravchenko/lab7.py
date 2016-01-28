@@ -29,7 +29,7 @@ for list_name, lists in lists.items():
         millis = []
         for size in mne_nujny_bally:
             spaggiari = 0.0
-            for i in range(5):
+            for bally in range(5):
                 array = lists(size)
                 t1 = time()
                 func(array)
